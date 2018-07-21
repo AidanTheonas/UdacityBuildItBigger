@@ -24,7 +24,6 @@ public class MainActivityFragment extends Fragment{
 
     @BindView(R.id.adView)
     AdView mAdView;
-    private InterstitialAd mInterstitialAd;
     public MainActivityFragment() { }
 
     @Override
@@ -37,16 +36,6 @@ public class MainActivityFragment extends Fragment{
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
-        if(getContext() != null)
-        mInterstitialAd = new InterstitialAd(getContext());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
         return root;
-    }
-
-    @OnClick(R.id.btn_tell_joke)
-    void tellJoke() {
-        mInterstitialAd.show();
     }
 }
