@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/main_activity_fragment"
+    tools:context=".MainActivityFragment">
+
+    <TextView
+        android:id="@+id/instructions_text_view"
+        style="@style/instructions_text_view"
+        android:text="@string/instructions" />
+
+    <Button
+        android:id="@+id/btn_tell_joke"
+        style="@style/btn_tell_joke"
+        android:text="@string/button_text" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id" />
+
+</RelativeLayout>
