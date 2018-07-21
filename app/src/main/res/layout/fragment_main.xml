@@ -3,6 +3,8 @@
     style="@style/main_activity_fragment"
     tools:context=".MainActivityFragment">
 
+    <include layout="@layout/progress_layout"/>
+
     <TextView
         android:id="@+id/instructions_text_view"
         style="@style/instructions_text_view"

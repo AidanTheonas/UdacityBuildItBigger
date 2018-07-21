@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -13,6 +15,7 @@ import com.udacity.gradle.builditbigger.helpers.EndPointsAsyncTask;
 import com.udacity.gradle.builditbigger.helpers.JokeResponse;
 import com.udacity.gradle.builditbigger.helpers.JokeTellingIdlingResource;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -22,6 +25,8 @@ import static com.servicebomba.jokesdisplay.ViewJoke.JOKE_INTENT;
 public class MainActivity extends AppCompatActivity implements JokeResponse {
     JokeTellingIdlingResource jokeTellingIdlingResource;
     private InterstitialAd interstitialAd;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements JokeResponse {
 
     @OnClick(R.id.btn_tell_joke)
     void tellJoke() {
+        progressBar.setVisibility(View.VISIBLE);
         jokeTellingIdlingResource.setIdleState(false);
         interstitialAd.show();
         new EndPointsAsyncTask(this,this).execute();
@@ -73,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements JokeResponse {
 
     @Override
     public void jokeResponse(String joke) {
+        progressBar.setVisibility(View.GONE);
         Intent intent = new Intent(this, ViewJoke.class);
         intent.putExtra(JOKE_INTENT,joke);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
