@@ -8,8 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.servicebomba.jokesdisplay.ViewJoke;
 import com.udacity.gradle.builditbigger.helpers.EndPointsAsyncTask;
 import com.udacity.gradle.builditbigger.helpers.JokeResponse;
@@ -24,7 +22,6 @@ import static com.servicebomba.jokesdisplay.ViewJoke.JOKE_INTENT;
 
 public class MainActivity extends AppCompatActivity implements JokeResponse {
     JokeTellingIdlingResource jokeTellingIdlingResource;
-    private InterstitialAd interstitialAd;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @Override
@@ -33,9 +30,6 @@ public class MainActivity extends AppCompatActivity implements JokeResponse {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         getJokeTellingIdlingResource();
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        interstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     public JokeTellingIdlingResource getJokeTellingIdlingResource() {
@@ -72,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements JokeResponse {
     void tellJoke() {
         progressBar.setVisibility(View.VISIBLE);
         jokeTellingIdlingResource.setIdleState(false);
-        interstitialAd.show();
         new EndPointsAsyncTask(this,this).execute();
     }
 
